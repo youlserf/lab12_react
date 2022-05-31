@@ -60,7 +60,7 @@ class App extends Component {
 
  
   innerjoin(){
-    
+
   }
   mostrar(cod, index) {
     axios.get('http://localhost:8000/biblioteca/prestamos/'+cod+'')
@@ -144,10 +144,10 @@ render() {
     <table border="1">
       <thead>
         <tr>
-          <td>user</td>
-          <td>fecha_prestamo</td>
-          <td>Rating</td>
-          <td>Categoria</td>
+          <td>Usuario</td>
+          <td>Libro</td>
+          <td>Fecha de prestamo</td>
+          <td>Fecha de devolucion</td>
           <td>Acciones</td>
         </tr>
       </thead>
@@ -156,15 +156,40 @@ render() {
           return (
             <tr key={prestamo.id}>
               <td>{prestamo.usuario}</td>
+              <td>{prestamo.libro}</td>
+              <td>{prestamo.f_prestamo}</td>
+              <td>{prestamo.f_devolucion}</td>
               <td>
                 <button onClick={() => this.mostrar(prestamo.id, index)}>Editar</button>
                 <button onClick={() => this.eliminar(prestamo.id)}>Eliminar</button>
               </td>
             </tr>
+
+
           )
         })}
       </tbody>
     </table>
+
+    <hr/>
+      <h1>{this.state.titulo}</h1>
+      <form onSubmit={this.guardar}>
+        <input type="hidden" value="{this.state.id}"/>
+        <p>Ingrese usuario
+        <input type="number" value={this.state.user} onChange={this.cambioUser}/>
+        </p>
+        <p>Ingrese libro
+        <input type="number" value={this.state.book} onChange={this.cambioBook}/>
+        </p>
+        <p>fecha de prestamo
+          <input type="text" value={this.state.fecha_prestamo} onChange={this.cambioFechaPrestamo}/>
+        </p>
+        <p>fecha de devolucion
+          <input type="text" value={this.state.fecha_devolucion} onChange={this.cambioFechaDevolucion}/>
+        </p>
+        <p><input type="submit"></input></p>
+
+      </form>
       
   </div>)
 }
